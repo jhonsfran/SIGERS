@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 26/04/2017 03:04:33 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="entity.Personal" table="personal" schema="public" optimistic-lock="version">
+        <id name="idPersonal" type="string">
+            <column name="id_personal" length="10" />
+            <generator class="assigned" />
+        </id>
+        <property name="nombre" type="string">
+            <column name="nombre" length="20" />
+        </property>
+        <property name="apellido" type="string">
+            <column name="apellido" length="20" />
+        </property>
+        <property name="tipoIdentificacion" type="string">
+            <column name="tipo_identificacion" length="20" />
+        </property>
+        <property name="cargo" type="string">
+            <column name="cargo" length="20" />
+        </property>
+        <property name="horarioTurno" type="string">
+            <column name="horario_turno" length="20" />
+        </property>
+        <property name="foto" type="string">
+            <column name="foto" length="50" />
+        </property>
+        <property name="direccion" type="string">
+            <column name="direccion" length="30" />
+        </property>
+        <property name="telefonoFijo" type="string">
+            <column name="telefono_fijo" length="10" />
+        </property>
+        <property name="telefonoCelular" type="string">
+            <column name="telefono_celular" length="10" />
+        </property>
+        <property name="correo" type="string">
+            <column name="correo" length="30" />
+        </property>
+        <property name="contrasena" type="string">
+            <column name="contrasena" length="30" />
+        </property>
+        <set name="facturas" table="factura" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_personal" length="10" />
+            </key>
+            <one-to-many class="entity.Factura" />
+        </set>
+        <set name="pedidos" table="pedido" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_mesero" length="10" />
+            </key>
+            <one-to-many class="entity.Pedido" />
+        </set>
+    </class>
+</hibernate-mapping>

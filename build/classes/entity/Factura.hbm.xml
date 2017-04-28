@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 26/04/2017 03:04:33 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="entity.Factura" table="factura" schema="public" optimistic-lock="version">
+        <id name="idFactura" type="string">
+            <column name="id_factura" length="10" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="personal" class="entity.Personal" fetch="select">
+            <column name="id_personal" length="10" />
+        </many-to-one>
+        <property name="horaPago" type="timestamp">
+            <column name="hora_pago" length="29" />
+        </property>
+        <property name="propina" type="java.lang.Integer">
+            <column name="propina" />
+        </property>
+        <property name="descuento" type="java.lang.Integer">
+            <column name="descuento" />
+        </property>
+        <property name="impuesto" type="java.lang.Integer">
+            <column name="impuesto" />
+        </property>
+        <property name="cedulaCliente" type="string">
+            <column name="cedula_cliente" length="10" />
+        </property>
+        <property name="totalPago" type="java.lang.Integer">
+            <column name="total_pago" />
+        </property>
+        <set name="facturaItemses" table="factura_items" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_factura" length="10" />
+            </key>
+            <one-to-many class="entity.FacturaItems" />
+        </set>
+        <set name="facturaFormaPagos" table="factura_forma_pago" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_factura" length="10" />
+            </key>
+            <one-to-many class="entity.FacturaFormaPago" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,79 @@
+create table Personal(
+id_personal varchar(10) primary key,
+nombre varchar(20),
+apellido varchar(20),
+tipo_identificacion varchar(20),
+cargo varchar(20),
+horario_turno varchar(20),
+foto varchar(50),
+direccion varchar(30),
+telefono_fijo varchar(10),
+telefono_celular varchar(10),
+correo varchar(30),
+contraseña varchar(30)
+)
+
+create table pedido(
+id_pedido varchar(10) primary key,
+id_mesa varchar(10),
+id_mesero varchar(10),
+id_tipo varchar(10),
+hora_inicio timestamp,
+hora_entrega timestamp,
+foreign key (id_mesero) references personal(id_personal)
+)
+
+create table categoria(
+id_categoria varchar(10) primary key,
+nombre varchar(15),
+descripcion varchar(100)
+)
+
+create table item_menu(
+id_item varchar(10) primary key,
+fotografia varchar(50),
+precio_actual int,
+descripcion varchar(100),
+categoria varchar(10),
+cantidad_disponible int,
+foreign key (categoria) references categoria(id_categoria)
+)
+
+
+create table pedido_item(
+id_pedido varchar(10),
+id_item varchar(10),
+foreign key (id_pedido) references pedido(id_pedido),
+foreign key (id_item) references item_menu(id_item)
+)
+
+create table factura(
+id_factura varchar(10) primary key,
+hora_pago timestamp,
+propina int,
+id_personal varchar(10),
+descuento int,
+impuesto int,
+cedula_cliente varchar(10),
+total_pago int,
+foreign key (id_personal) references personal(id_personal)
+)
+
+create table forma_pago(
+id_pago varchar(10) primary key,
+nombre varchar(10),
+descripcion varchar(100)
+)
+
+create table factura_items(
+id_item varchar(10),
+id_factura varchar(10),
+foreign key (id_item) references item_menu(id_item),
+foreign key (id_factura) references factura(id_factura)
+)
+create table factura_forma_pago(
+id_pago varchar(10),
+id_factura varchar(10),
+foreign key(id_pago) references forma_pago(id_pago),
+foreign key(id_factura) references factura(id_factura)
+)

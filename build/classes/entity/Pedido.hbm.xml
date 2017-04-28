@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 26/04/2017 03:04:33 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="entity.Pedido" table="pedido" schema="public" optimistic-lock="version">
+        <id name="idPedido" type="string">
+            <column name="id_pedido" length="10" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="personal" class="entity.Personal" fetch="select">
+            <column name="id_mesero" length="10" />
+        </many-to-one>
+        <property name="idMesa" type="string">
+            <column name="id_mesa" length="10" />
+        </property>
+        <property name="idTipo" type="string">
+            <column name="id_tipo" length="10" />
+        </property>
+        <property name="horaInicio" type="timestamp">
+            <column name="hora_inicio" length="29" />
+        </property>
+        <property name="horaEntrega" type="timestamp">
+            <column name="hora_entrega" length="29" />
+        </property>
+        <set name="pedidoItems" table="pedido_item" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_pedido" length="10" />
+            </key>
+            <one-to-many class="entity.PedidoItem" />
+        </set>
+    </class>
+</hibernate-mapping>

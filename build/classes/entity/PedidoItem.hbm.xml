@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 26/04/2017 03:04:33 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="entity.PedidoItem" table="pedido_item" schema="public" optimistic-lock="version">
+        <composite-id name="id" class="entity.PedidoItemId">
+            <key-property name="idPedido" type="string">
+                <column name="id_pedido" length="10" />
+            </key-property>
+            <key-property name="idItem" type="string">
+                <column name="id_item" length="10" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="itemMenu" class="entity.ItemMenu" update="false" insert="false" fetch="select">
+            <column name="id_item" length="10" />
+        </many-to-one>
+        <many-to-one name="pedido" class="entity.Pedido" update="false" insert="false" fetch="select">
+            <column name="id_pedido" length="10" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 26/04/2017 03:04:33 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="entity.ItemMenu" table="item_menu" schema="public" optimistic-lock="version">
+        <id name="idItem" type="string">
+            <column name="id_item" length="10" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="categoria" class="entity.Categoria" fetch="select">
+            <column name="categoria" length="10" />
+        </many-to-one>
+        <property name="fotografia" type="string">
+            <column name="fotografia" length="50" />
+        </property>
+        <property name="precioActual" type="java.lang.Integer">
+            <column name="precio_actual" />
+        </property>
+        <property name="descripcion" type="string">
+            <column name="descripcion" length="100" />
+        </property>
+        <property name="cantidadDisponible" type="java.lang.Integer">
+            <column name="cantidad_disponible" />
+        </property>
+        <set name="facturaItemses" table="factura_items" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_item" length="10" />
+            </key>
+            <one-to-many class="entity.FacturaItems" />
+        </set>
+        <set name="pedidoItems" table="pedido_item" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_item" length="10" />
+            </key>
+            <one-to-many class="entity.PedidoItem" />
+        </set>
+    </class>
+</hibernate-mapping>
